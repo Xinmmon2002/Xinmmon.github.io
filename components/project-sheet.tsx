@@ -5,7 +5,7 @@ import originalFonts from '@/lib/project-fonts.json';
 type Box = [number, number, number, number];
 type Metric = { unit: string; value?: number };
 type Segment = { t: string; f: string; fs: string; size: number; weight?: number; c?: string; lh: Metric; ls: Metric; d?: string; tc?: string };
-type Layer = { id: string; k: 'text' | 'asset' | 'shape'; b: Box; clip?: Box; o?: number; src?: string; imageStyle?: CSSProperties; assetFrame?: { b: Box; matrix: [number, number, number, number, number, number] }; image?: boolean; name?: string; align?: string; valign?: string; paragraph?: number; segs?: Segment[]; fill?: string; stroke?: string; sw?: number; radius?: number; ellipse?: boolean; line?: boolean };
+type Layer = { id: string; k: 'text' | 'asset' | 'shape'; b: Box; clip?: Box; o?: number; src?: string; imageStyle?: CSSProperties; assetFrame?: { b: Box; matrix: [number, number, number, number, number, number] }; image?: boolean; name?: string; align?: string; valign?: string; noWrap?: boolean; paragraph?: number; segs?: Segment[]; fill?: string; stroke?: string; sw?: number; radius?: number; ellipse?: boolean; line?: boolean };
 type Sheet = { n: number; id: string; w: number; h: number; bg: string; layers: Layer[] };
 const sheets = layouts as unknown as Record<number, Sheet>;
 const fonts = originalFonts as Record<string, {family: string; file: string}>;
@@ -42,7 +42,7 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
         const align=layer.align==='justified'?'justify':layer.align as CSSProperties['textAlign'];
         return <div key={layer.id} className="sheet-layer sheet-text" data-figma-node={layer.id} style={{...outer,textAlign:align,display:'flex',flexDirection:'column',justifyContent:layer.valign==='center'?'center':layer.valign==='bottom'?'flex-end':'flex-start'}}>
           <div className="layer-reveal text-reveal" style={{'--reveal-delay':delay} as CSSProperties}>
-            <div className="sheet-text-content" style={segments[0]?typography(segments[0],page.w):undefined}>{segments.map((segment,i)=><span key={i} style={typography(segment,page.w)}>{segment.t}</span>)}</div>
+            <div className="sheet-text-content" style={{...(segments[0]?typography(segments[0],page.w):{}),...(layer.noWrap?{whiteSpace:'nowrap' as const,overflowWrap:'normal' as const}:{})}}>{segments.map((segment,i)=><span key={i} style={typography(segment,page.w)}>{segment.t}</span>)}</div>
           </div>
         </div>;
       }
