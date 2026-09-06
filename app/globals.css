@@ -28,7 +28,7 @@
 .project-arrow{margin-top:3px}
 .project-link-title{font-size:clamp(16px,1.25vw,21px);line-height:1.6;overflow-wrap:anywhere}
 .project-peek-inner{display:flex;flex-direction:column;gap:18px;min-height:0}
-.project-peek img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;object-position:center;margin:0}
+.project-peek img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:center;margin:0}
 .project-peek p{width:100%;margin:0 0 28px;font-size:16px;line-height:1.85;min-height:88px}
 @media(max-width:760px){.category.is-open{height:900px}.project-link{min-height:88px}.project-link-title{font-size:18px}.project-peek-inner{display:flex}.project-peek img{display:block;width:100%;height:auto}.project-peek p{min-height:90px}}
 
