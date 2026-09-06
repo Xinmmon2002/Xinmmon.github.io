@@ -63,3 +63,5 @@
 @font-face{font-family:'Portfolio Original 7';src:url('/fonts/original-7.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 .sheet-asset .layer-reveal,.sheet-graphic,.sheet-image-link{position:relative}
 .project-summary{margin-top:32px}.work-intro .awards-list{margin-top:24px;margin-bottom:6px}
+
+@font-face{font-family:'Portfolio Ejin Copy';src:url('/fonts/ejin-logo-copy.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
