@@ -21,6 +21,7 @@
 
 
 /* Expanded project previews share one full-width image and text column. */
+.project-entry{display:block;cursor:pointer}
 .category{transition:height .5s var(--ease)}
 .category.is-open{height:clamp(850px,100vh,1080px)}
 .project-link{min-height:92px;align-items:flex-start}

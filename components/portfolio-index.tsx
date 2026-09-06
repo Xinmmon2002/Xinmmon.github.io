@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Plus, Minus } from 'lucide-react';
@@ -17,10 +16,10 @@ return <section className="index-grid" id="works" aria-label="作品总目录">
 <div className="category-bottom" aria-hidden={isOpen}><span>{category.note}</span><span>{entries.length?String(entries.length).padStart(2,'0')+' PROJECTS':'IN PROGRESS'}</span></div>
 <CollapsibleContent className="category-menu" keepMounted>
 <div className="project-menu-inner">
-{entries.length?entries.map((project,i)=><div className="project-entry" key={project.slug}>
-<Link className="project-link" href={'/work/'+project.slug}><span className="project-ordinal">{String(i+1).padStart(2,'0')}</span><span className="project-link-title">{project.title}</span><ArrowUpRight className="project-arrow" size={24} strokeWidth={1.5}/></Link>
+{entries.length?entries.map((project,i)=><a className="project-entry" href={'/work/'+project.slug} key={project.slug}>
+<div className="project-link"><span className="project-ordinal">{String(i+1).padStart(2,'0')}</span><span className="project-link-title">{project.title}</span><ArrowUpRight className="project-arrow" size={24} strokeWidth={1.5}/></div>
 <div className="project-peek"><div className="project-peek-inner"><Image src={projectThumbnail(project.slug)} width={project.category==='commercial'?350:536} height={project.category==='commercial'?350:344} alt={project.shortTitle+"作品概览"} loading="lazy"/><p>{project.description}</p></div></div>
-</div>):<div className="aigc-empty"><span className="empty-plus" aria-hidden="true">＋</span><p>新的探索，正在发生。</p><span>作品整理中</span></div>}
+</a>):<div className="aigc-empty"><span className="empty-plus" aria-hidden="true">＋</span><p>新的探索，正在发生。</p><span>作品整理中</span></div>}
 </div>
 </CollapsibleContent></Collapsible>})}
 </section>;
