@@ -13,7 +13,6 @@ export const categories: {id:CategoryId;title:string;english:string;index:string
 {id:'awards',title:'获奖作品',english:'AWARDED',index:'02',note:'RECOGNIZED CREATIVITY'},
 {id:'aigc',title:'AIGC 作品',english:'EXPLORATIONS',index:'03',note:'BEYOND THE EXPECTED'}
 ];
-export const pageImage = (n:number) => '/assets/page-'+String(n).padStart(2,'0')+'.webp';
 export const getProject = (slug:string) => projects.find(p=>p.slug===slug);
 export const contact = { name:'陶心悦', english:'TAO XINYUE', email:'taoxinyue@sjtu.edu.cn' };
 

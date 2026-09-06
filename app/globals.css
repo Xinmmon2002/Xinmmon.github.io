@@ -34,8 +34,32 @@
 @media(max-width:760px){.category.is-open{height:900px}.project-link{min-height:88px}.project-link-title{font-size:18px}.project-peek-inner{display:flex}.project-peek img{display:block;width:100%;height:auto}.project-peek p{min-height:90px}}
 
 /* A continuous project canvas with a narrow white space between pages. */
-.waterfall{position:relative;left:50%;width:100vw;margin-left:-50vw;padding:0;display:flex;flex-direction:column;gap:12px;background:#fff}
-.waterfall-page{display:block;width:100%;margin:0;padding:0;border:0;line-height:0;cursor:zoom-in;overflow:hidden}
-.waterfall-page img{display:block;width:100%;height:auto;aspect-ratio:16/9;margin:0;object-fit:contain}
-.motion-ready .waterfall-page.reveal{transform:none;transition:opacity .7s var(--ease)}
-.waterfall-page:focus-visible{outline-offset:-4px;position:relative;z-index:1}
+.waterfall{position:relative;left:50%;width:100vw;margin-left:-50vw;padding:0;display:flex;flex-direction:column;gap:24px;background:#fff}
+
+@font-face{font-family:'Portfolio Bebas';src:url('/fonts/bebas.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Portfolio Inter';src:url('/fonts/inter.woff2') format('woff2');font-weight:100 900;font-display:swap}
+@font-face{font-family:'Portfolio Noto';src:url('/fonts/noto-sc.woff2') format('woff2');font-weight:100 900;font-display:swap}
+.project-sheet{position:relative;width:100%;flex:none;overflow:hidden;container-type:inline-size;isolation:isolate}
+.sheet-layer{position:absolute;margin:0;padding:0;transform-origin:top left}
+.sheet-text{user-select:text;cursor:text;overflow:visible}
+.sheet-text-content{margin:0;padding:0;white-space:pre-wrap;overflow-wrap:break-word;word-break:normal}
+.sheet-asset{overflow:hidden}
+.sheet-asset .layer-reveal,.sheet-graphic,.sheet-image-link{display:block;width:100%;height:100%}
+.sheet-image-link{cursor:zoom-in}
+.sheet-asset img{display:block;max-width:none;width:100%;height:100%;object-fit:fill;margin:0}
+.sheet-shape{pointer-events:none}
+.layer-reveal{opacity:1}
+.motion-ready .layer-reveal{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .95s var(--ease);transition-delay:var(--reveal-delay,0ms)}
+.motion-ready .image-reveal{transform:translateY(10px) scale(1.012);transform-origin:center}
+.motion-ready .layer-reveal.is-visible{opacity:1;transform:none}
+.sheet-image-link:focus-visible{outline-offset:-4px}
+@media(prefers-reduced-motion:reduce){.motion-ready .layer-reveal{opacity:1;transform:none}}
+@font-face{font-family:'Portfolio Original 1';src:url('/fonts/original-1.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 2';src:url('/fonts/original-2.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 3';src:url('/fonts/original-3.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 4';src:url('/fonts/original-4.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 5';src:url('/fonts/original-5.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 6';src:url('/fonts/original-6.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Portfolio Original 7';src:url('/fonts/original-7.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+.sheet-asset .layer-reveal,.sheet-graphic,.sheet-image-link{position:relative}
+.project-summary{margin-top:32px}.work-intro .awards-list{margin-top:24px;margin-bottom:6px}
