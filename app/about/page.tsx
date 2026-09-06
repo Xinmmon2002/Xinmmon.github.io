@@ -1,0 +1,7 @@
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {SiteHeader,SiteFooter} from '@/components/site-header';
+import {projects} from '@/lib/portfolio';
+import {profileSections} from '@/lib/profile';
+export const metadata:Metadata={title:'关于我',description:'陶心悦，上海交通大学设计专业，关注品牌视觉、包装文创与 AI 设计工作流。'};
+export default function About(){return <><SiteHeader/><main className="about-main"><div className="about-heading"><div><p className="eyebrow">PERSONAL PROFILE / 陶心悦</p><h1>About me.</h1><span>视觉设计师 · 浙江宁波</span></div><p>在上海交通大学本硕就读设计专业，具有视觉传达和交互艺术专业背景。关注品牌视觉、包装与文创设计，重视文化叙事与视觉表达的结合，持续探索 AI 工具在创意构思、图像生成与方案迭代中的应用。</p></div><div className="about-columns">{[profileSections.slice(0,3),profileSections.slice(3)].map((sections,i)=><div key={i}>{sections.map(section=><section key={section.title} className={'about-section'+(section.title==='AI 工具与工作流'?' ai-skill-block':'')}><h2>{section.title}<span>{section.english}</span></h2>{section.entries.map((entry,j)=><div className="about-entry" key={j}><h3>{entry.title}</h3><p style={{whiteSpace:'pre-line'}}>{entry.body}</p></div>)}</section>)}{i===1&&<section className="about-section"><h2>项目经历<span>SELECTED PROJECTS</span></h2>{projects.filter(p=>p.category==='commercial').map(p=><div className="about-entry" key={p.slug}><h3><Link href={'/work/'+p.slug}>{p.title} ↗</Link></h3><p>{p.year}</p></div>)}</section>}</div>)}</div></main><SiteFooter/></>}
