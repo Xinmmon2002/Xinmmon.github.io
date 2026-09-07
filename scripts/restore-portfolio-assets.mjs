@@ -13,3 +13,12 @@ if (gif.length !== manifest.bytes || createHash('sha256').update(gif).digest('he
 await mkdir(resolve(root, 'public/assets'), {recursive:true});
 await writeFile(resolve(root, 'public/assets/yangtze-city-loop.gif'), gif);
 console.log('Restored original YANGTZE GIF (' + gif.length + ' bytes).');
+
+const filmSource = resolve(root, 'source-assets/ejin-ncda-film');
+const filmManifest = JSON.parse(await readFile(resolve(filmSource, 'manifest.json'), 'utf8'));
+const film = Buffer.concat(await Promise.all(filmManifest.parts.map(name => readFile(resolve(filmSource, name)))));
+if (film.length !== filmManifest.bytes || createHash('sha256').update(film).digest('hex') !== filmManifest.sha256) {
+  throw new Error('The Ejin film source is incomplete or corrupted.');
+}
+await writeFile(resolve(root, 'public/assets/ejin-ncda-film.mp4'), film);
+console.log('Restored Ejin film (' + film.length + ' bytes).');

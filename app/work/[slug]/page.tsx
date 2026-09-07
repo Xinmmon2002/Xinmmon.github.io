@@ -6,6 +6,8 @@ import {SiteHeader,SiteFooter} from '@/components/site-header';
 import {ScrollEffects} from '@/components/scroll-effects';
 import {projects,getProject} from '@/lib/portfolio';
 import {ProjectSheet} from '@/components/project-sheet';
+import {ProjectFilm} from '@/components/project-film';
+import {Fragment} from 'react';
 export function generateStaticParams(){return projects.map(p=>({slug:p.slug}))}
 export const dynamicParams=false;
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const p=getProject(slug);return p?{title:p.shortTitle,description:p.description}:{title:'未找到作品'}}
@@ -25,7 +27,10 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
         {project.awards?.length?<ul className="awards-list reveal" aria-label="项目获奖">{project.awards.map(award=><li key={award}>{award}</li>)}</ul>:null}
       </section>
       <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>
-        {project.pages.map((n,i)=><ProjectSheet number={n} first={i===0} key={n}/>)}
+        {project.pages.map((n,i)=><Fragment key={n}>
+          <ProjectSheet number={n} first={i===0}/>
+          {project.slug==='ejin-savorscape'&&n===38?<ProjectFilm/>:null}
+        </Fragment>)}
         {project.slug==='yangtze-brand'?<img src="/assets/yangtze-city-loop.gif" alt="YANGTZE 城市品牌应用动态展示" width={1138} height={640} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
       </div>
       <a href={'/work/'+next.slug} className="next-project"><div><span>NEXT PROJECT</span><h2>{next.shortTitle}</h2></div><ArrowUpRight size={48} strokeWidth={1}/></a>
