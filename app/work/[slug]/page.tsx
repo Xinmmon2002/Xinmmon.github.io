@@ -24,7 +24,10 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
         <div className="overview-grid project-summary reveal">{project.overview.map(text=><p key={text}>{text}</p>)}</div>
         {project.awards?.length?<ul className="awards-list reveal" aria-label="项目获奖">{project.awards.map(award=><li key={award}>{award}</li>)}</ul>:null}
       </section>
-      <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>{project.pages.map((n,i)=><ProjectSheet number={n} first={i===0} key={n}/>)}</div>
+      <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>
+        {project.pages.map((n,i)=><ProjectSheet number={n} first={i===0} key={n}/>)}
+        {project.slug==='yangtze-brand'?<img src="/assets/yangtze-city-loop.gif" alt="YANGTZE 城市品牌应用动态展示" width={1138} height={640} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
+      </div>
       <a href={'/work/'+next.slug} className="next-project"><div><span>NEXT PROJECT</span><h2>{next.shortTitle}</h2></div><ArrowUpRight size={48} strokeWidth={1}/></a>
     </main>
     <SiteFooter/>

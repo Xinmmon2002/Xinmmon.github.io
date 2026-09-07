@@ -37,3 +37,6 @@ next-env.d.ts
 /outputs/
 /work/
 *.tsbuildinfo
+
+# Reconstructed byte-for-byte from source-assets before builds.
+/public/assets/yangtze-city-loop.gif
