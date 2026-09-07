@@ -78,3 +78,18 @@
 @media(hover:hover){.sheet-marquee:hover .sheet-marquee-track{animation-play-state:paused}}
 @keyframes sheet-marquee-left{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.sheet-marquee-track{animation:none!important;transform:none}}
+
+/* Each G column starts at the original crop; equal copies include the seam gap. */
+.sheet-vertical-window{overflow:hidden}
+.sheet-vertical-window>.layer-reveal{height:100%}
+.sheet-vertical-origin{transform:translateY(calc(-1 * var(--vertical-offset)))}
+.sheet-vertical-track{display:flex;flex-direction:column;width:100%;animation:sheet-vertical-up var(--vertical-duration) linear infinite}
+.sheet-vertical-copy{display:flex;flex:none;flex-direction:column;gap:var(--vertical-gap);padding-bottom:var(--vertical-gap)}
+.sheet-vertical-tile{flex:none;width:100%;height:var(--vertical-tile-height);overflow:hidden}
+.sheet-vertical-tile img{width:100%;height:100%;object-fit:cover;object-position:center}
+.sheet-vertical-window[data-scroll-direction=down] .sheet-vertical-track{animation-name:sheet-vertical-down}
+.motion-ready .sheet-vertical-window .layer-reveal:not(.is-visible) .sheet-vertical-track,.sheet-vertical-window:focus-within .sheet-vertical-track{animation-play-state:paused}
+@media(hover:hover){.sheet-vertical-window:hover .sheet-vertical-track{animation-play-state:paused}}
+@keyframes sheet-vertical-up{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes sheet-vertical-down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.sheet-vertical-track{animation:none!important;transform:none}}

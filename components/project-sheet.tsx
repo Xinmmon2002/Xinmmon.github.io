@@ -7,7 +7,8 @@ type Metric = { unit: string; value?: number };
 type Segment = { t: string; f: string; fs: string; size: number; weight?: number; c?: string; lh: Metric; ls: Metric; d?: string; tc?: string };
 type Layer = { id: string; k: 'text' | 'asset' | 'shape'; b: Box; clip?: Box; o?: number; src?: string; imageStyle?: CSSProperties; assetFrame?: { b: Box; matrix: [number, number, number, number, number, number] }; image?: boolean; name?: string; align?: string; valign?: string; noWrap?: boolean; paragraph?: number; segs?: Segment[]; fill?: string; stroke?: string; sw?: number; radius?: number; ellipse?: boolean; line?: boolean };
 type MarqueeRow = { id: string; b: Box; tileWidth: number; gap: number; seconds: number; tiles: { id: string; name: string; sources: string[] }[] };
-type Sheet = { n: number; id: string; w: number; h: number; bg: string; layers: Layer[]; marquees?: MarqueeRow[] };
+type MarqueeColumn = { id: string; b: Box; gap: number; offset: number; seconds: number; direction: 'up' | 'down'; tiles: { id: string; name: string; src: string }[] };
+type Sheet = { n: number; id: string; w: number; h: number; bg: string; layers: Layer[]; marquees?: MarqueeRow[]; verticalMarquees?: MarqueeColumn[] };
 const sheets = layouts as unknown as Record<number, Sheet>;
 const fonts = originalFonts as Record<string, {family: string; file: string}>;
 const unit = (value: number, width: number) => `${value / width * 100}cqw`;
@@ -71,6 +72,19 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
               </a>)}
             </div>)}
           </div>)}
+        </div>
+      </div>
+    </div>)}
+    {page.verticalMarquees?.map(column=><div key={column.id} className="sheet-layer sheet-vertical-window" data-scroll-direction={column.direction} style={{...position({id:column.id,k:'asset',b:column.b},page),'--vertical-offset':unit(column.offset,page.w),'--vertical-gap':unit(column.gap,page.w),'--vertical-tile-height':unit(column.b[2],page.w),'--vertical-duration':`${column.seconds}s`} as CSSProperties} aria-label="G 标识创意延展">
+      <div className="layer-reveal">
+        <div className="sheet-vertical-origin">
+          <div className="sheet-vertical-track">
+            {[0,1].map(copy=><div key={copy} className="sheet-vertical-copy" aria-hidden={copy===1?true:undefined}>
+              {column.tiles.map(tile=><a key={tile.id} className="sheet-image-link sheet-vertical-tile" data-figma-node={tile.id} href={tile.src} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}`}>
+                <img src={tile.src} alt={copy===1?'':tile.name} width={Math.round(column.b[2])} height={Math.round(column.b[2])} loading="lazy" decoding="async"/>
+              </a>)}
+            </div>)}
+          </div>
         </div>
       </div>
     </div>)}
