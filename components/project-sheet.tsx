@@ -6,7 +6,8 @@ type Box = [number, number, number, number];
 type Metric = { unit: string; value?: number };
 type Segment = { t: string; f: string; fs: string; size: number; weight?: number; c?: string; lh: Metric; ls: Metric; d?: string; tc?: string };
 type Layer = { id: string; k: 'text' | 'asset' | 'shape'; b: Box; clip?: Box; o?: number; src?: string; imageStyle?: CSSProperties; assetFrame?: { b: Box; matrix: [number, number, number, number, number, number] }; image?: boolean; name?: string; align?: string; valign?: string; noWrap?: boolean; paragraph?: number; segs?: Segment[]; fill?: string; stroke?: string; sw?: number; radius?: number; ellipse?: boolean; line?: boolean };
-type Sheet = { n: number; id: string; w: number; h: number; bg: string; layers: Layer[] };
+type MarqueeRow = { id: string; b: Box; tileWidth: number; gap: number; seconds: number; tiles: { id: string; name: string; sources: string[] }[] };
+type Sheet = { n: number; id: string; w: number; h: number; bg: string; layers: Layer[]; marquees?: MarqueeRow[] };
 const sheets = layouts as unknown as Record<number, Sheet>;
 const fonts = originalFonts as Record<string, {family: string; file: string}>;
 const unit = (value: number, width: number) => `${value / width * 100}cqw`;
@@ -60,5 +61,18 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
       const border=layer.stroke?`${unit(layer.sw||1,page.w)} solid ${layer.stroke}`:undefined;
       return <div key={layer.id} className="sheet-layer sheet-shape" aria-hidden="true" style={{...outer,background:layer.fill??undefined,border:layer.line?undefined:border,borderTop:layer.line&&layer.b[2]>0?border:undefined,borderLeft:layer.line&&layer.b[2]===0?border:undefined,borderRadius:layer.ellipse?'50%':unit(layer.radius??0,page.w)}}/>;
     })}
+    {page.marquees?.map(row=><div key={row.id} className="sheet-layer sheet-marquee" style={{...position({id:row.id,k:'asset',b:row.b},page),'--tile-width':unit(row.tileWidth,page.w),'--tile-gap':unit(row.gap,page.w),'--marquee-duration':`${row.seconds}s`} as CSSProperties} aria-label="品牌触点应用展示">
+      <div className="layer-reveal">
+        <div className="sheet-marquee-track">
+          {[0,1].map(copy=><div key={copy} className="sheet-marquee-copy" aria-hidden={copy===1?true:undefined}>
+            {row.tiles.map(tile=><div key={tile.id} className="sheet-marquee-tile" data-figma-node={tile.id}>
+              {tile.sources.map((src,i)=><a key={src} className="sheet-image-link" href={src} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}${tile.sources.length>1?` ${i+1}`:''}`}>
+                <img src={src} alt={copy===1?'':tile.name} width={Math.round(row.tileWidth/tile.sources.length)} height={row.b[3]} loading="lazy" decoding="async"/>
+              </a>)}
+            </div>)}
+          </div>)}
+        </div>
+      </div>
+    </div>)}
   </section>;
 }

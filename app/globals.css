@@ -65,3 +65,16 @@
 .project-summary{margin-top:32px}.work-intro .awards-list{margin-top:24px;margin-bottom:6px}
 
 @font-face{font-family:'Portfolio Ejin Copy';src:url('/fonts/ejin-logo-copy.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+
+/* Two identical four-tile copies keep the gallery's trailing gap at the loop seam. */
+.sheet-marquee{overflow:hidden}
+.sheet-marquee>.layer-reveal{height:100%}
+.sheet-marquee-track{display:flex;width:max-content;height:100%;animation:sheet-marquee-left var(--marquee-duration) linear infinite}
+.sheet-marquee-copy{display:flex;flex:none;gap:var(--tile-gap);padding-right:var(--tile-gap);height:100%}
+.sheet-marquee-tile{display:flex;flex:0 0 var(--tile-width);width:var(--tile-width);height:100%;gap:.472cqw;overflow:hidden}
+.sheet-marquee-tile .sheet-image-link{flex:1;min-width:0;width:auto}
+.sheet-marquee-tile img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
+.sheet-marquee:focus-within .sheet-marquee-track{animation-play-state:paused}
+@media(hover:hover){.sheet-marquee:hover .sheet-marquee-track{animation-play-state:paused}}
+@keyframes sheet-marquee-left{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.sheet-marquee-track{animation:none!important;transform:none}}
