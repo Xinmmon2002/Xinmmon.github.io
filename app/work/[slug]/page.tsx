@@ -32,6 +32,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
           {project.slug==='ejin-savorscape'&&n===38?<ProjectFilm/>:null}
         </Fragment>)}
         {project.slug==='yangtze-brand'?<img src="/assets/yangtze-city-loop.gif" alt="YANGTZE 城市品牌应用动态展示" width={1138} height={640} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
+        {project.slug==='alleyway-dreams'?<img src="/assets/alleyway-illustration-loop.webp" alt="童梦巷陌·老物疗心插画动态展示" width={2554} height={1076} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
       </div>
       <a href={'/work/'+next.slug} className="next-project"><div><span>NEXT PROJECT</span><h2>{next.shortTitle}</h2></div><ArrowUpRight size={48} strokeWidth={1}/></a>
     </main>

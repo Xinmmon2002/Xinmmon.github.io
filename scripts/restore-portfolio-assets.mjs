@@ -22,3 +22,12 @@ if (film.length !== filmManifest.bytes || createHash('sha256').update(film).dige
 }
 await writeFile(resolve(root, 'public/assets/ejin-ncda-film.mp4'), film);
 console.log('Restored Ejin film (' + film.length + ' bytes).');
+
+const alleySource = resolve(root, 'source-assets/alleyway-illustration-loop');
+const alleyManifest = JSON.parse(await readFile(resolve(alleySource, 'manifest.json'), 'utf8'));
+const alley = Buffer.concat(await Promise.all(alleyManifest.parts.map(name => readFile(resolve(alleySource, name)))));
+if (alley.length !== alleyManifest.bytes || createHash('sha256').update(alley).digest('hex') !== alleyManifest.sha256) {
+  throw new Error('The Alleyway animation source is incomplete or corrupted.');
+}
+await writeFile(resolve(root, 'public/assets/alleyway-illustration-loop.webp'), alley);
+console.log('Restored Alleyway animation (' + alley.length + ' bytes).');
