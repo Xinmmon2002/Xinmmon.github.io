@@ -1,6 +1,68 @@
 import type {Metadata} from 'next';
 import {SiteHeader,SiteFooter} from '@/components/site-header';
-import {projects} from '@/lib/portfolio';
-import {profileSections} from '@/lib/profile';
+import Image from 'next/image';
+import Link from 'next/link';
+import {profileIntro,profileProjects,profileSections,profileWorkflow} from '@/lib/profile';
+import './about.css';
 export const metadata:Metadata={title:'关于我',description:'陶心悦，上海交通大学设计专业，关注品牌视觉、包装文创与 AI 设计工作流。'};
-export default function About(){return <><SiteHeader/><main className="about-main"><div className="about-heading"><div><p className="eyebrow">PERSONAL PROFILE / 陶心悦</p><h1>About me.</h1><span>视觉设计师 · 浙江宁波</span></div><p>在上海交通大学本硕就读设计专业，具有视觉传达和交互艺术专业背景。关注品牌视觉、包装与文创设计，重视文化叙事与视觉表达的结合，持续探索 AI 工具在创意构思、图像生成与方案迭代中的应用。</p></div><div className="about-columns">{[profileSections.slice(0,3),profileSections.slice(3)].map((sections,i)=><div key={i}>{sections.map(section=><section key={section.title} className={'about-section'+(section.title==='AI 工具与工作流'?' ai-skill-block':'')}><h2>{section.title}<span>{section.english}</span></h2>{section.entries.map((entry,j)=><div className="about-entry" key={j}><h3>{entry.title}</h3><p style={{whiteSpace:'pre-line'}}>{entry.body}</p></div>)}</section>)}{i===1&&<section className="about-section"><h2>项目经历<span>SELECTED PROJECTS</span></h2>{projects.filter(p=>p.category==='commercial').map(p=><div className="about-entry" key={p.slug}><h3><a href={'/work/'+p.slug}>{p.title} ↗</a></h3><p>{p.year}</p></div>)}</section>}</div>)}</div></main><SiteFooter/></>}
+function ProfileSection({section,skill=false}:{section:typeof profileSections[number];skill?:boolean}){
+  return <section className={'profile-section'+(skill?' profile-skill-section':'')}>
+    <h2>{section.title}{!skill&&<span>{section.english}</span>}</h2>
+    {section.entries.map(entry=><div className="profile-entry" key={entry.title+entry.body}>
+      <h3>{entry.title}</h3>
+      <p>{entry.body}</p>
+    </div>)}
+  </section>;
+}
+
+export default function About(){
+  const [education,awards,internship,ai,craft]=profileSections;
+  return <><SiteHeader/>
+    <main className="profile-page">
+      <header className="profile-header">
+        <p>PERSONAL PROFILE / 个人简介</p>
+        <h1>About me.</h1>
+      </header>
+      <div className="profile-layout">
+        <aside className="profile-identity" aria-label="个人信息">
+          <Image className="profile-portrait" src="/assets/profile/tao-xinyue.png" alt="陶心悦的个人照片" width={354} height={349} priority unoptimized/>
+          <h2>陶心悦 <span>Tao Xinyue</span></h2>
+          <p className="profile-role">求职方向：视觉设计师</p>
+          <address>
+            <a href="tel:15267889978">电话：15267889978</a>
+            <a href="mailto:taoxinyue@sjtu.edu.cn">邮箱：taoxinyue@sjtu.edu.cn</a>
+            <span>浙江 宁波</span>
+          </address>
+        </aside>
+        <div className="profile-background">
+          <section className="profile-section profile-summary">
+            <h2>个人简介<span>PROFILE</span></h2>
+            <p>{profileIntro}</p>
+          </section>
+          <ProfileSection section={education}/>
+          <ProfileSection section={awards}/>
+        </div>
+        <div className="profile-career">
+          <div className="profile-skills-panel">
+            <p className="profile-skills-eyebrow">TOOLS &amp; SKILLS</p>
+            <div className="profile-skills-columns">
+              <ProfileSection section={ai} skill/>
+              <ProfileSection section={craft} skill/>
+            </div>
+            <p className="profile-workflow-note">{profileWorkflow}</p>
+          </div>
+          <div className="profile-practice">
+            <ProfileSection section={internship}/>
+            <section className="profile-section">
+              <h2>项目经历<span>PROJECTS</span></h2>
+              {profileProjects.map(project=><div className="profile-entry" key={project.slug}>
+                <h3><Link href={'/work/'+project.slug}>{project.title} <span aria-hidden="true">↗</span></Link></h3>
+                <p>{project.year}</p>
+              </div>)}
+            </section>
+          </div>
+        </div>
+      </div>
+    </main><SiteFooter/>
+  </>;
+}

@@ -1,3 +1,14 @@
+export const profileIntro='本人在上海交通大学本硕就读设计专业，具有视觉传达和交互艺术专业背景。关注品牌视觉、包装与文创设计，重视文化叙事与视觉表达的结合，擅长探索AI工具在创意构思、图像生成与方案迭代中的应用。';
+
+export const profileProjects=[
+  {slug:'taituo-brand',title:'扬子江药业集团男科产品“泰妥妥”品牌形象设计',year:'2025–2026'},
+  {slug:'yangtze-brand',title:'扬子江药业集团国际化品牌视觉形象设计',year:'2024–2026'},
+  {slug:'fuyao-identity',title:'福耀科技大学视觉形象识别系统手册',year:'2024'},
+  {slug:'fuyao-glass',title:'福耀科技大学大型琉璃艺术装置',year:'2023–2024'},
+];
+
+export const profileWorkflow='持续探索全 AI 设计工作流：构思 → 生成 → 迭代 → 交付';
+
 export const profileSections=[
   {
     "title": "教育背景",
@@ -41,11 +52,11 @@ export const profileSections=[
   },
   {
     "title": "实习经历",
-    "english": "EXPERIENCE",
+    "english": "INTERNSHIP",
     "entries": [
       {
         "title": "上海海铂仕艺术科技有限公司",
-        "body": "扬子江药业集团有限公司控股\n2025.09—2026.02"
+        "body": "（扬子江药业集团有限公司控股）\n2025.09—2026.02"
       },
       {
         "title": "宁波市规划设计研究院",
@@ -54,24 +65,24 @@ export const profileSections=[
     ]
   },
   {
-    "title": "AI 工具与工作流",
+    "title": "AI 工具",
     "english": "AI PRACTICE",
     "entries": [
       {
-        "title": "图像与视频生成",
-        "body": "Midjourney、Nano Banana、Grok、即梦。"
+        "title": "图像生成",
+        "body": "熟练使用 Midjourney、Nano Banana。"
       },
       {
-        "title": "工作流与 Vibe Coding",
-        "body": "熟练运用 ChatGPT、Gemini、Codex 搭建设计工作流与进行 AI 辅助编程。"
+        "title": "视频生成",
+        "body": "熟练使用 Grok、即梦进行AIGC影像创作。"
       },
       {
-        "title": "本地部署",
-        "body": "掌握大模型本地部署，辅助项目设计与科研。"
+        "title": "AI Agent与工作流",
+        "body": "熟练运用 ChatGPT、Gemini、Codex 进行设计工作流搭建。"
       },
       {
-        "title": "全 AI 设计工作流",
-        "body": "构思 → 生成 → 迭代 → 交付"
+        "title": "Vibe Coding",
+        "body": "熟练运用 AI 进行辅助编程。"
       }
     ]
   },
@@ -80,8 +91,12 @@ export const profileSections=[
     "english": "CRAFT & TOOLS",
     "entries": [
       {
-        "title": "设计软件",
-        "body": "熟练掌握 Adobe Illustrator、Photoshop、Figma、Adobe Audition、AutoCAD、Rhino、SketchUp；熟悉 Adobe After Effects、3ds Max、Sketch。"
+        "title": "熟练掌握",
+        "body": "Adobe Illustrator · Photoshop · Figma\nAdobe Audition · AutoCAD · Rhino · SU"
+      },
+      {
+        "title": "熟悉使用",
+        "body": "Adobe After Effects · 3ds Max · Sketch"
       },
       {
         "title": "手绘表达",
