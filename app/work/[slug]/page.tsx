@@ -17,7 +17,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
   const project=getProject(slug);
   if(!project)notFound();
   const next=projects[(projects.findIndex(p=>p.slug===slug)+1)%projects.length];
-  return <div style={{'--work-accent':project.accent} as CSSProperties}>
+  return <div className={project.slug==='animal-farm'?'animal-project':undefined} style={{'--work-accent':project.accent} as CSSProperties}>
     <ScrollEffects/><SiteHeader/>
     <main className="work-main">
       <section className="work-intro" aria-labelledby="project-title">
