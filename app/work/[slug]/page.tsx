@@ -9,6 +9,7 @@ import {ProjectSheet} from '@/components/project-sheet';
 import {ProjectFilm} from '@/components/project-film';
 import {AnimalFarmProject} from '@/components/animal-farm-project';
 import {Fragment} from 'react';
+import '../project-intro.css';
 export function generateStaticParams(){return projects.map(p=>({slug:p.slug}))}
 export const dynamicParams=false;
 export async function generateMetadata({params}:{params:Promise<{slug:string}>}):Promise<Metadata>{const {slug}=await params;const p=getProject(slug);return p?{title:p.shortTitle,description:p.description}:{title:'未找到作品'}}
@@ -24,7 +25,16 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
         <a href="/#works" className="back-link">← 返回作品目录</a>
         <div className="work-meta reveal"><span>{project.discipline}</span><span>{project.year}</span></div>
         <h1 id="project-title" className="reveal">{project.title}</h1>
-        <div className="overview-grid project-summary reveal">{project.overview.map(text=><p key={text}>{text}</p>)}</div>
+        <div className={'overview-grid project-summary reveal'+(!project.contribution?' project-summary-only':'')}>
+          <section className="project-summary-column" aria-labelledby="project-overview-title">
+            <h2 id="project-overview-title">项目简介<span lang="en">PROJECT OVERVIEW</span></h2>
+            <div className="project-overview-copy">{project.overview.map(text=><p key={text}>{text}</p>)}</div>
+          </section>
+          {project.contribution&&<section className="project-summary-column" aria-labelledby="project-role-title">
+            <h2 id="project-role-title">个人职责与产出<span lang="en">ROLE &amp; DELIVERABLES</span></h2>
+            <p>{project.contribution}</p>
+          </section>}
+        </div>
         {project.awards?.length?<ul className="awards-list reveal" aria-label="项目获奖">{project.awards.map(award=><li key={award}>{award}</li>)}</ul>:null}
       </section>
       <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>
