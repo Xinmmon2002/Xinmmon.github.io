@@ -7,6 +7,7 @@ export const projects: Project[] = [
 {slug:'fuyao-glass',title:'福耀科技大学大型琉璃艺术装置',shortTitle:'福耀 · 琉璃艺术装置',english:'Glass, Light & Possibility',category:'commercial',year:'2023—2024',discipline:'公共艺术 / 材料与光影',description:'以古法琉璃连接传统工艺与当代光影，探索公共艺术与校园空间的关系。',overview:['作品为福耀科技大学图书馆空间而设计，以古法琉璃连接校园精神、传统工艺与当代科技。手工琉璃莲花层叠组成艺术墙，让材料自身的色彩、厚度和纹样形成丰富层次。','装置由手工琉璃外立面、不锈钢背板与可编程 LED 显示屏组成。数字影像穿过背板微孔，再经琉璃折射与叠色，随着观看角度呈现持续变化的光影。'],pages:[5,6,7,8,9,10],accent:'#207e73'},
 {slug:'ejin-savorscape',title:'额吉食光 · 额济纳旗文旅伴手礼包装设计',shortTitle:'额吉食光',english:'Ejin Savorscape',category:'awards',year:'2026',discipline:'包装设计 / 文旅文创',description:'将蒙古包、旋转盲盒与地域风味结合，让打开礼盒成为一次文化探索。',overview:['以蒙古包为灵感，将旋转盲盒结构与可拆卸顶盖结合。六个独立容器对应胡杨林、居延文化、航天精神、传统民居、丝路遗产和民族舞蹈，承载额济纳当地的肉制品、乳制品与果干。','用户在旋转、对位和抽取中发现不同风味。胡杨、沙漠与地域建筑进一步转化为橙蓝插画纹样，延展至香薰、杯具、文具与出行用品。'],awards:['MUSE Design Awards 2026 · 银奖','第14届 NCDA · 上海赛区三等奖'],pages:[38,39,40,41,42],accent:'#de831c'},
 {slug:'alleyway-dreams',title:'童梦巷陌·老物疗心',shortTitle:'童梦巷陌·老物疗心',english:'Alleyway Dreams, Healing Through Old Treasures',category:'awards',year:'2026',discipline:'插画设计 / 文化叙事',description:'把北方老巷转化为温暖的想象空间，在日常物件与陪伴中讲述童年的情绪。',overview:['作品关注 6—12 岁儿童在成长与社交中的焦虑，将北方老巷化作温暖的疗愈空间。横向长卷依次展开“巷中发现”“创意时刻”和“温暖陪伴”，通过探索、表达与接纳讲述情绪变化。','开放式叙事结合和缓色调，以蓝灰平衡情绪。铁皮青蛙、竹蜻蜓、糖葫芦与旧玩具承载记忆，再延展为角色、海报、故事板和文创物件。'],awards:['米兰设计周2026中国高校设计学科师生优秀作品展 · 国家级一等奖'],pages:[43,44],accent:'#dd76a5'}
+,{slug:'animal-farm',title:'ANIMAL FARM / 动物农场',shortTitle:'ANIMAL FARM',english:'An AI Experimental Film',category:'aigc',year:'2026',discipline:'AI 实验短片 / 全流程创作',description:'以高饱和糖果色、对称构图和动物头套营造怪诞舞台，探索从剧本到成片的 AI 协作创作。',overview:['《ANIMAL FARM》是一部以乔治·奥威尔《动物农场》为灵感的 AI 实验短片。作品以高饱和糖果色、对称构图和动物头套营造怪诞的舞台感，呈现从反抗、平等承诺到权力重演的过程。','我主导概念构思与视觉方向，串联剧本、分镜与提示词、AI 关键帧及视频生成，通过持续筛选与调整，探索 AI 协作下的完整影像创作流程。'],pages:[],accent:'#bd1f30'}
 ];
 export const categories: {id:CategoryId;title:string;english:string;index:string;note:string}[] = [
 {id:'commercial',title:'已落地商业项目',english:'COMMERCIAL',index:'01',note:'DESIGN IN PRACTICE'},
@@ -16,4 +17,4 @@ export const categories: {id:CategoryId;title:string;english:string;index:string
 export const getProject = (slug:string) => projects.find(p=>p.slug===slug);
 export const contact = { name:'陶心悦', english:'TAO XINYUE', email:'taoxinyue@sjtu.edu.cn' };
 
-export const projectThumbnail = (slug:string) => `/assets/thumb-${slug}.webp?v=20260906-composite`;
+export const projectThumbnail = (slug:string) => slug==='animal-farm'?'/assets/animal-farm/cover.jpg':`/assets/thumb-${slug}.webp?v=20260906-composite`;

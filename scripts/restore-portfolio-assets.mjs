@@ -31,3 +31,13 @@ if (alley.length !== alleyManifest.bytes || createHash('sha256').update(alley).d
 }
 await writeFile(resolve(root, 'public/assets/alleyway-illustration-loop.webp'), alley);
 console.log('Restored Alleyway animation (' + alley.length + ' bytes).');
+
+const animalSource = resolve(root, 'source-assets/animal-farm-film');
+const animalManifest = JSON.parse(await readFile(resolve(animalSource, 'manifest.json'), 'utf8'));
+const animalFilm = Buffer.concat(await Promise.all(animalManifest.parts.map(name => readFile(resolve(animalSource, name)))));
+if (animalFilm.length !== animalManifest.bytes || createHash('sha256').update(animalFilm).digest('hex') !== animalManifest.sha256) {
+  throw new Error('The ANIMAL FARM film source is incomplete or corrupted.');
+}
+await mkdir(resolve(root, 'public/assets/animal-farm'), {recursive:true});
+await writeFile(resolve(root, 'public/assets/animal-farm/film.mp4'), animalFilm);
+console.log('Restored ANIMAL FARM film (' + animalFilm.length + ' bytes).');

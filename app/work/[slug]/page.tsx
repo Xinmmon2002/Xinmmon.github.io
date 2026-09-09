@@ -7,6 +7,7 @@ import {ScrollEffects} from '@/components/scroll-effects';
 import {projects,getProject} from '@/lib/portfolio';
 import {ProjectSheet} from '@/components/project-sheet';
 import {ProjectFilm} from '@/components/project-film';
+import {AnimalFarmProject} from '@/components/animal-farm-project';
 import {Fragment} from 'react';
 export function generateStaticParams(){return projects.map(p=>({slug:p.slug}))}
 export const dynamicParams=false;
@@ -27,6 +28,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
         {project.awards?.length?<ul className="awards-list reveal" aria-label="项目获奖">{project.awards.map(award=><li key={award}>{award}</li>)}</ul>:null}
       </section>
       <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>
+        {project.slug==='animal-farm'?<AnimalFarmProject/>:null}
         {project.pages.map((n,i)=><Fragment key={n}>
           <ProjectSheet number={n} first={i===0}/>
           {project.slug==='ejin-savorscape'&&n===38?<ProjectFilm/>:null}
