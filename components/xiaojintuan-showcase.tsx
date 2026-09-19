@@ -21,7 +21,7 @@ const screens=[
 export function XiaojintuanShowcase(){
   return <section className="xiaojintuan-showcase reveal" id="high-fidelity-showcase" aria-label="小金团高保真界面循环展示">
     <div className="xiaojintuan-showcase-track" aria-hidden="true">
-      {[0,1].map(set=><div className="xiaojintuan-showcase-set" key={set}>
+      {[0,1,2].map(set=><div className="xiaojintuan-showcase-set" key={set}>
         {screens.map(([file])=><div className="xiaojintuan-showcase-screen" key={set+'-'+file}>
           <Image src={sitePath('/assets/interaction/showcase/'+file)} alt="" width={728} height={1428} loading="eager"/>
         </div>)}
