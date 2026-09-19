@@ -7,7 +7,7 @@
 - Implementation screenshot evidence: Codex in-app Browser desktop capture and mobile capture from this task; combined comparison at `http://127.0.0.1:4173/qa-compare.html`
 - Desktop viewport: 1264 × 710 CSS px, device scale factor 1
 - Mobile viewport: 390 × 844 CSS px, device scale factor 1
-- State: autoplay running; fixed central phone frame; screen strip moving right-to-left
+- State: autoplay running; fixed central phone frame; each screen holds for about 1.3 seconds and changes in about 0.5 seconds
 - Density normalization: source and implementation were fitted into equal-width panes with `object-fit: contain`; comparison focused on composition, scale, spacing, edge crop, central framing and elevation rather than source pixel density.
 
 **Full-view comparison evidence**
@@ -35,6 +35,7 @@
 **Comparison history**
 
 - Earlier P2: pausing on hover could freeze the center on a split transition. Fix: removed hover pause while retaining offscreen pausing and reduced-motion support. Post-fix evidence: consecutive browser captures showed the screen strip continuing through later product screens.
+- Earlier P2: the first implementation moved at a constant speed, the phone frame extended beyond the visible UI bounds, and the loop ending was not perceptibly connected to its beginning. Fix: rebuilt the motion as 14 explicit hold/transition intervals, reduced the device frame to 93.4% of the card width, shifted it down to the PNG content center, and ended the animation at exactly one repeated-set width. Post-fix evidence: timed browser samples stayed fixed from 0–1300 ms, moved rapidly between 1300–1800 ms, then held the next screen; the final screen and duplicated first screen occupied the center on opposite sides of the iteration boundary without an empty frame.
 
 **Implementation checklist**
 
