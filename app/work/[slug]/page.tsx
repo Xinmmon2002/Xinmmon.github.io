@@ -10,6 +10,7 @@ import {projects,getProject} from '@/lib/portfolio';
 import {ProjectSheet} from '@/components/project-sheet';
 import {ProjectFilm} from '@/components/project-film';
 import {AnimalFarmProject} from '@/components/animal-farm-project';
+import {XiaojintuanShowcase} from '@/components/xiaojintuan-showcase';
 import {Fragment} from 'react';
 import '../project-intro.css';
 export function generateStaticParams(){return projects.map(p=>({slug:p.slug}))}
@@ -41,6 +42,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
       </section>
       <div className={'waterfall'+(project.heroImage?' waterfall--static':'')} aria-label={project.shortTitle+'完整作品长卷'}>
         {project.heroImage?<Image className="static-project-image static-project-hero" src={sitePath(project.heroImage.src)} alt={project.heroImage.alt} width={project.heroImage.width} height={project.heroImage.height} priority/>:null}
+        {project.slug==='xiaojintuan'?<XiaojintuanShowcase/>:null}
         {project.contentImages?.map(image=><Image className="static-project-image" src={sitePath(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" key={image.src}/>)}
         {project.slug==='animal-farm'?<AnimalFarmProject/>:null}
         {project.pages.map((n,i)=><Fragment key={n}>
