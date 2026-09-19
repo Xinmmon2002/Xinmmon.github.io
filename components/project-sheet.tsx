@@ -1,3 +1,4 @@
+import {sitePath} from '@/lib/site-path';
 import type { CSSProperties } from 'react';
 import layouts from '@/lib/project-layouts.json';
 import originalFonts from '@/lib/project-fonts.json';
@@ -53,8 +54,8 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
         const frame=layer.assetFrame;
         // Preserve the source crop in its local frame before applying Figma's rotation.
         const frameStyle:CSSProperties|undefined=frame?{position:'absolute',left:`${frame.b[0]/layer.b[2]*100}%`,top:`${frame.b[1]/layer.b[3]*100}%`,width:`${frame.b[2]/layer.b[2]*100}%`,height:`${frame.b[3]/layer.b[3]*100}%`,transform:`matrix(${frame.matrix.join(',')})`,transformOrigin:'top left',overflow:'hidden'}:undefined;
-        const image=<img src={layer.src} style={layer.imageStyle} width={Math.max(1,Math.round(frame?.b[2]??layer.b[2]))} height={Math.max(1,Math.round(frame?.b[3]??layer.b[3]))} alt={layer.image?(layer.name??'作品图片'):''} loading={first?'eager':'lazy'} decoding="async"/>;
-        const content=layer.image?<a className="sheet-image-link" href={layer.src} target="_blank" rel="noopener noreferrer" aria-label="放大查看作品图片">{image}</a>:image;
+        const image=<img src={sitePath(layer.src)} style={layer.imageStyle} width={Math.max(1,Math.round(frame?.b[2]??layer.b[2]))} height={Math.max(1,Math.round(frame?.b[3]??layer.b[3]))} alt={layer.image?(layer.name??'作品图片'):''} loading={first?'eager':'lazy'} decoding="async"/>;
+        const content=layer.image?<a className="sheet-image-link" href={sitePath(layer.src)} target="_blank" rel="noopener noreferrer" aria-label="放大查看作品图片">{image}</a>:image;
         return <div key={layer.id} className="sheet-layer sheet-asset" data-figma-node={layer.id} style={outer}><div className={animated?'layer-reveal image-reveal':'sheet-graphic'} style={{'--reveal-delay':delay} as CSSProperties}>
           {frame?<div style={frameStyle}>{content}</div>:content}
         </div></div>;
@@ -67,8 +68,8 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
         <div className="sheet-marquee-track">
           {[0,1].map(copy=><div key={copy} className="sheet-marquee-copy" aria-hidden={copy===1?true:undefined}>
             {row.tiles.map(tile=><div key={tile.id} className="sheet-marquee-tile" data-figma-node={tile.id}>
-              {tile.sources.map((src,i)=><a key={src} className="sheet-image-link" href={src} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}${tile.sources.length>1?` ${i+1}`:''}`}>
-                <img src={src} alt={copy===1?'':tile.name} width={Math.round(row.tileWidth/tile.sources.length)} height={row.b[3]} loading="lazy" decoding="async"/>
+              {tile.sources.map((src,i)=><a key={src} className="sheet-image-link" href={sitePath(src)} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}${tile.sources.length>1?` ${i+1}`:''}`}>
+                <img src={sitePath(src)} alt={copy===1?'':tile.name} width={Math.round(row.tileWidth/tile.sources.length)} height={row.b[3]} loading="lazy" decoding="async"/>
               </a>)}
             </div>)}
           </div>)}
@@ -80,8 +81,8 @@ export function ProjectSheet({number,first=false}:{number:number;first?:boolean}
         <div className="sheet-vertical-origin">
           <div className="sheet-vertical-track">
             {[0,1].map(copy=><div key={copy} className="sheet-vertical-copy" aria-hidden={copy===1?true:undefined}>
-              {column.tiles.map(tile=><a key={tile.id} className="sheet-image-link sheet-vertical-tile" data-figma-node={tile.id} href={tile.src} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}`}>
-                <img src={tile.src} alt={copy===1?'':tile.name} width={Math.round(column.b[2])} height={Math.round(column.b[2])} loading="lazy" decoding="async"/>
+              {column.tiles.map(tile=><a key={tile.id} className="sheet-image-link sheet-vertical-tile" data-figma-node={tile.id} href={sitePath(tile.src)} target="_blank" rel="noopener noreferrer" tabIndex={copy===1?-1:undefined} aria-label={`放大查看${tile.name}`}>
+                <img src={sitePath(tile.src)} alt={copy===1?'':tile.name} width={Math.round(column.b[2])} height={Math.round(column.b[2])} loading="lazy" decoding="async"/>
               </a>)}
             </div>)}
           </div>

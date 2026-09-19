@@ -1,4 +1,5 @@
 'use client';
+import {sitePath} from '@/lib/site-path';
 
 import {useRef,useState} from 'react';
 import {Play} from 'lucide-react';
@@ -19,7 +20,7 @@ export function ProjectFilm({src='/assets/ejin-ncda-film.mp4',poster='/assets/ej
   // Keep the supplied film intact; no separate caption file was provided.
   return <section className="project-film" aria-label={title}>
     {/* oxlint-disable-next-line jsx-a11y/media-has-caption */}
-    <video ref={video} src={src} poster={poster} width={1920} height={1080} controls={started} preload="none" playsInline autoPlay={false} loop={false}
+    <video ref={video} src={sitePath(src)} poster={sitePath(poster)} width={1920} height={1080} controls={started} preload="none" playsInline autoPlay={false} loop={false}
       onPlay={()=>setStarted(true)}
       onEnded={()=>{setStarted(false);video.current?.load();}}
       aria-label={title}/>

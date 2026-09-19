@@ -1,3 +1,4 @@
+import {sitePath} from '@/lib/site-path';
 import {ArrowRight} from 'lucide-react';
 import Image from 'next/image';
 import {ProjectFilm} from '@/components/project-film';
@@ -20,8 +21,8 @@ export function AnimalFarmProject(){
       </div>
       <div className="animal-stills">
         {animalFarmStills.map((still,i)=>{const number=String(i+1).padStart(2,'0');return <figure className="animal-still reveal" key={still.time}>
-          <a href={'/assets/animal-farm/still-'+number+'.png'} target="_blank" rel="noreferrer" aria-label={'查看完整画面：'+still.title}>
-            <Image src={'/assets/animal-farm/still-'+number+'.webp'} alt={still.title} width={900} height={506} loading="lazy"/>
+          <a href={sitePath('/assets/animal-farm/still-'+number+'.png')} target="_blank" rel="noreferrer" aria-label={'查看完整画面：'+still.title}>
+            <Image src={sitePath('/assets/animal-farm/still-'+number+'.webp')} alt={still.title} width={900} height={506} loading="lazy"/>
           </a>
           <figcaption><small>{number} · {still.time} / FILM STILL</small><strong>{still.title}</strong><span lang="en">{still.english}</span></figcaption>
         </figure>})}

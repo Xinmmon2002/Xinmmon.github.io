@@ -1,7 +1,7 @@
+import {sitePath} from '@/lib/site-path';
 import type {Metadata} from 'next';
 import {SiteHeader,SiteFooter} from '@/components/site-header';
 import Image from 'next/image';
-import Link from 'next/link';
 import {profileIntro,profileProjects,profileSections,profileWorkflow} from '@/lib/profile';
 import './about.css';
 export const metadata:Metadata={title:'关于我',description:'陶心悦，上海交通大学设计专业，关注品牌视觉、包装文创与 AI 设计工作流。'};
@@ -25,7 +25,7 @@ export default function About(){
       </header>
       <div className="profile-layout">
         <aside className="profile-identity" aria-label="个人信息">
-          <Image className="profile-portrait" src="/assets/profile/tao-xinyue.png" alt="陶心悦的个人照片" width={354} height={349} priority unoptimized/>
+          <Image className="profile-portrait" src={sitePath("/assets/profile/tao-xinyue.png")} alt="陶心悦的个人照片" width={354} height={349} priority unoptimized/>
           <h2>陶心悦 <span>Tao Xinyue</span></h2>
           <p className="profile-role">求职方向：视觉设计师</p>
           <address>
@@ -56,7 +56,7 @@ export default function About(){
             <section className="profile-section">
               <h2>项目经历<span>PROJECTS</span></h2>
               {profileProjects.map(project=><div className="profile-entry" key={project.slug}>
-                <h3><Link href={'/work/'+project.slug}>{project.title} <span aria-hidden="true">↗</span></Link></h3>
+                <h3><a href={sitePath('/work/'+project.slug)}>{project.title} <span aria-hidden="true">↗</span></a></h3>
                 <p>{project.year}</p>
               </div>)}
             </section>

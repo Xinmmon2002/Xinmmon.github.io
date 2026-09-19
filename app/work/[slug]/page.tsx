@@ -1,4 +1,6 @@
+import {sitePath} from '@/lib/site-path';
 import type {Metadata} from 'next';
+import Image from 'next/image';
 import type {CSSProperties} from 'react';
 import {notFound} from 'next/navigation';
 import {ArrowUpRight} from 'lucide-react';
@@ -22,7 +24,7 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
     <ScrollEffects/><SiteHeader/>
     <main className="work-main">
       <section className="work-intro" aria-labelledby="project-title">
-        <a href="/#works" className="back-link">← 返回作品目录</a>
+        <a href={sitePath("/#works")} className="back-link">← 返回作品目录</a>
         <div className="work-meta reveal"><span>{project.discipline}</span><span>{project.year}</span></div>
         <h1 id="project-title" className="reveal">{project.title}</h1>
         <div className={'overview-grid project-summary reveal'+(!project.contribution?' project-summary-only':'')}>
@@ -37,16 +39,18 @@ export default async function ProjectPage({params}:{params:Promise<{slug:string}
         </div>
         {project.awards?.length?<ul className="awards-list reveal" aria-label="项目获奖">{project.awards.map(award=><li key={award}>{award}</li>)}</ul>:null}
       </section>
-      <div className="waterfall" aria-label={project.shortTitle+'完整作品长卷'}>
+      <div className={'waterfall'+(project.heroImage?' waterfall--static':'')} aria-label={project.shortTitle+'完整作品长卷'}>
+        {project.heroImage?<Image className="static-project-image static-project-hero" src={sitePath(project.heroImage.src)} alt={project.heroImage.alt} width={project.heroImage.width} height={project.heroImage.height} priority/>:null}
+        {project.contentImages?.map(image=><Image className="static-project-image" src={sitePath(image.src)} alt={image.alt} width={image.width} height={image.height} loading="lazy" key={image.src}/>)}
         {project.slug==='animal-farm'?<AnimalFarmProject/>:null}
         {project.pages.map((n,i)=><Fragment key={n}>
           <ProjectSheet number={n} first={i===0}/>
           {project.slug==='ejin-savorscape'&&n===38?<ProjectFilm/>:null}
         </Fragment>)}
-        {project.slug==='yangtze-brand'?<img src="/assets/yangtze-city-loop.gif" alt="YANGTZE 城市品牌应用动态展示" width={1138} height={640} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
-        {project.slug==='alleyway-dreams'?<img src="/assets/alleyway-illustration-loop.webp" alt="童梦巷陌·老物疗心插画动态展示" width={2554} height={1076} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
+        {project.slug==='yangtze-brand'?<img src={sitePath("/assets/yangtze-city-loop.gif")} alt="YANGTZE 城市品牌应用动态展示" width={1138} height={640} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
+        {project.slug==='alleyway-dreams'?<img src={sitePath("/assets/alleyway-illustration-loop.webp")} alt="童梦巷陌·老物疗心插画动态展示" width={2554} height={1076} loading="lazy" decoding="async" style={{display:'block',width:'100%',height:'auto'}}/>:null}
       </div>
-      <a href={'/work/'+next.slug} className="next-project"><div><span>NEXT PROJECT</span><h2>{next.shortTitle}</h2></div><ArrowUpRight size={48} strokeWidth={1}/></a>
+      <a href={sitePath('/work/'+next.slug)} className="next-project"><div><span>NEXT PROJECT</span><h2>{next.shortTitle}</h2></div><ArrowUpRight size={48} strokeWidth={1}/></a>
     </main>
     <SiteFooter/>
   </div>;

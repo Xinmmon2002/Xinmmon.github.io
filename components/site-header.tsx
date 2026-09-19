@@ -1,3 +1,4 @@
-export function SiteHeader(){return <header className="site-header"><a className="wordmark" href="/" aria-label="陶心悦作品集首页">TAO XINYUE<span className="wordmark-dot">.</span></a><span className="header-discipline">VISUAL DESIGN & AI EXPLORATION</span><nav aria-label="主导航"><a href="/#works">作品目录 <span>Index</span></a><a href="/about">关于我 <span>About</span></a></nav></header>}
+import {sitePath} from '@/lib/site-path';
+export function SiteHeader(){return <header className="site-header"><a className="wordmark" href={sitePath("/")} aria-label="陶心悦作品集首页">TAO XINYUE<span className="wordmark-dot">.</span></a><span className="header-discipline">VISUAL DESIGN & AI EXPLORATION</span><nav aria-label="主导航"><a href={sitePath("/#works")}>作品目录 <span>Index</span></a><a href={sitePath("/about")}>关于我 <span>About</span></a></nav></header>}
 export function SiteFooter(){return <footer className="site-footer"><span>陶心悦 · TAO XINYUE</span><a href="mailto:taoxinyue@sjtu.edu.cn">taoxinyue@sjtu.edu.cn ↗</a><span>SELECTED WORKS / 2023—2026</span></footer>}
 

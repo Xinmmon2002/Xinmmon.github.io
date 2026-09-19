@@ -1,4 +1,5 @@
 'use client';
+import {sitePath} from '@/lib/site-path';
 
 import {useState} from 'react';
 import Image from 'next/image';
@@ -7,7 +8,7 @@ import {Tabs,TabsList,TabsTrigger,TabsContent} from '@/components/ui/tabs';
 import {animalFarmSteps} from '@/lib/animal-farm';
 
 function WorkflowImage({file,alt,className=''}:{file:string;alt:string;className?:string}){
-  const src='/assets/animal-farm/'+file;
+  const src=sitePath('/assets/animal-farm/'+file);
   const dimensions:Record<string,[number,number]>={
     'script-notion.png':[1572,1525],'script-chatgpt.png':[1132,817],
     'shots-prompts.png':[2559,1501],'keyframe-notion.png':[861,1522],
