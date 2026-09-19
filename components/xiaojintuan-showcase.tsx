@@ -27,6 +27,6 @@ export function XiaojintuanShowcase(){
         </div>)}
       </div>)}
     </div>
-    <Image className="xiaojintuan-showcase-device" src={sitePath('/assets/interaction/showcase/device-frame.png')} alt="" width={432} height={881} loading="eager" aria-hidden="true"/>
+    <Image className="xiaojintuan-showcase-device" src={sitePath('/assets/interaction/showcase/device-frame-figma.svg')} alt="" width={430} height={932} loading="eager" aria-hidden="true"/>
   </section>;
 }
