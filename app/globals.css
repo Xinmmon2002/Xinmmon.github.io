@@ -36,6 +36,9 @@
 /* A continuous project canvas with a narrow white space between pages. */
 .waterfall{position:relative;left:50%;width:100vw;margin-left:-50vw;padding:0;display:flex;flex-direction:column;gap:24px;background:#fff}
 .waterfall--static{gap:20px}.static-project-image{display:block;width:100%;height:auto;background:#fff}.static-project-hero{margin-bottom:4px}
+.work-intro h1.ava-project-title{max-width:none;white-space:nowrap;font-size:clamp(15px,3.55vw,64px);letter-spacing:-.045em}
+.project-video{position:relative;width:100%;background:#171717}
+.project-video video{display:block;width:100%;height:auto;max-height:100vh;object-fit:contain;background:#171717}
 .xiaojintuan-showcase{--showcase-card:clamp(180px,20vw,364px);--showcase-gap:clamp(16px,2.1vw,40px);position:relative;width:100%;height:clamp(470px,52vw,1000px);overflow:hidden;isolation:isolate;background:var(--muted)}
 .xiaojintuan-showcase-track{position:absolute;left:50%;top:50%;display:flex;width:max-content;transform:translate3d(calc(var(--showcase-card)/-2 - 33.333333%),-50%,0);animation:xiaojintuan-showcase-loop 22.4s cubic-bezier(.7,0,.15,1) infinite;will-change:transform}
 .xiaojintuan-showcase-set{display:flex;align-items:center;gap:var(--showcase-gap);padding-right:var(--showcase-gap)}
