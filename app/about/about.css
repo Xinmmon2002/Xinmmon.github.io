@@ -20,6 +20,8 @@
 .profile-section{margin:0 0 32px;min-width:0}
 .profile-section h2{display:flex;align-items:baseline;flex-wrap:wrap;gap:5px 10px;font-size:21px;font-weight:700;line-height:1.5;margin:0 0 15px;letter-spacing:-.025em}
 .profile-section h2>span{font-family:Arial,sans-serif;font-size:11px;font-weight:400;letter-spacing:.05em;color:var(--profile-muted)}
+.profile-portfolio a{display:inline-block;font-family:Arial,sans-serif;font-size:17px;line-height:1.5;text-decoration:underline;text-underline-offset:5px}
+.profile-portfolio a:hover{color:var(--profile-muted)}
 .profile-entry{margin-bottom:18px}
 .profile-entry:last-child{margin-bottom:0}
 .profile-entry h3{font-size:15px;font-weight:700;line-height:1.75;margin:0 0 3px;overflow-wrap:anywhere}
@@ -42,6 +44,7 @@
   .profile-career{grid-column:1/-1}
   .profile-background{display:grid;grid-template-columns:1fr 1fr;gap:28px}
   .profile-background .profile-summary{grid-column:1/-1}
+  .profile-background .profile-portfolio{grid-column:1/-1}
   .profile-background .profile-section{margin-bottom:0}
   .profile-skills-panel{padding:30px}
   .profile-skills-columns{gap:40px}

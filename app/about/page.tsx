@@ -4,7 +4,7 @@ import {SiteHeader,SiteFooter} from '@/components/site-header';
 import Image from 'next/image';
 import {profileIntro,profileProjects,profileSections,profileWorkflow} from '@/lib/profile';
 import './about.css';
-export const metadata:Metadata={title:'关于我',description:'陶心悦，上海交通大学设计专业，关注品牌视觉、包装文创与 AI 设计工作流。'};
+export const metadata:Metadata={title:'关于我',description:'陶心悦，上海交通大学设计专业，关注用户需求、品牌视觉、交互设计与 AI 设计工作流。'};
 function ProfileSection({section,skill=false}:{section:typeof profileSections[number];skill?:boolean}){
   return <section className={'profile-section'+(skill?' profile-skill-section':'')}>
     <h2>{section.title}{!skill&&<span>{section.english}</span>}</h2>
@@ -27,7 +27,7 @@ export default function About(){
         <aside className="profile-identity" aria-label="个人信息">
           <Image className="profile-portrait" src={sitePath("/assets/profile/tao-xinyue.png")} alt="陶心悦的个人照片" width={354} height={349} priority unoptimized/>
           <h2>陶心悦 <span>Tao Xinyue</span></h2>
-          <p className="profile-role">求职方向：视觉设计师</p>
+          <p className="profile-role">视觉设计 · 交互设计</p>
           <address>
             <a href="tel:15267889978">电话：15267889978</a>
             <a href="mailto:taoxinyue@sjtu.edu.cn">邮箱：taoxinyue@sjtu.edu.cn</a>
@@ -38,6 +38,10 @@ export default function About(){
           <section className="profile-section profile-summary">
             <h2>个人简介<span>PROFILE</span></h2>
             <p>{profileIntro}</p>
+          </section>
+          <section className="profile-section profile-portfolio">
+            <h2>个人作品集网站<span>PORTFOLIO</span></h2>
+            <a href={sitePath('/#works')}>xinmmon2002.github.io <span aria-hidden="true">↗</span></a>
           </section>
           <ProfileSection section={education}/>
           <ProfileSection section={awards}/>
